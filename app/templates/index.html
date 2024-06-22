@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 
+{% block stylesheets %}
+
+<link rel="stylesheet" href="./static/styles/link.css">
+
+{% endblock %}
+
 {% block content %}
 
 <section class="hero is-halfheight">
     <div class="hero-body">
         <div class="container is-centered">
-            <div class="columns">
+            <div class="columns is-vcentered">
                 <div class="column">
                     <p class="title">Personal Portfolio</p>
                     <p class="subtitle">A place to showcase stuff</p>
@@ -14,10 +20,46 @@
                     <figure class="image is-128x128">
                       <img class="is-rounded" src="./static/img/logo.jpg" />
                     </figure>
+
+                    <div class="container m-3">
+                        <div class="icon-text">
+                            <a href="mailto:vignesh.sureshkumar@gatech.edu">
+                                <span class="icon">
+                                  <i class="fas fa-md fa-envelope"></i>
+                                </span>
+                                <span>mail@google.com</span>
+                            </a>
+                        </div>
+                        <div class="icon-text">
+                            <a href="https://github.com/vigneshsk17">
+                                <span class="icon">
+                                  <i class="fa-brands fa-md fa-github"></i>
+                                </span>
+                                <span>github username</span>
+                            </a>
+                        </div>
+                        <div class="icon-text">
+                            <a href="https://linkedin.com/in/vigneshsk1">
+                                <span class="icon">
+                                  <i class="fa-brands fa-md fa-linkedin"></i>
+                                </span>
+                                <span>linkedin username</span>
+                            </a>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+</section>
+
+<section class="section is-small">
+    <h1 class="title">About Me</h1>
+    <h2 class="subtitle">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </h2>
 </section>
 
 {% endblock %}
