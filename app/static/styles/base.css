@@ -3,7 +3,15 @@
     color: white;
   }
 
-  .navbar-item:hover {
-    background-color: lightgray; /* Light gray on hover */
-    color: black;
-  }
+.navbar-item:hover {
+  background-color: lightgray; /* Light gray on hover */
+  color: black;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
