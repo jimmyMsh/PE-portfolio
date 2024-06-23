@@ -38,38 +38,22 @@
           <a class="navbar-item {{ 'is-selected' if active_page == 'home' else '' }}" href="{{ url_for('index') }}">
             Home
           </a>
-
-          <a class="navbar-item">
-            Documentation
+          <a class="navbar-item {{ 'is-selected' if active_page == 'about' else '' }}" href="{{ url_for('about') }}">
+            About
+          </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'work' else '' }}" href="{{ url_for('work') }}">
+            Work
+          </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'hobbies' else '' }}" href="{{ url_for('hobbies') }}">
+            Hobbies
+          </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'education' else '' }}" href="{{ url_for('education') }}">
+            Education
+          </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">
+            Contact Me
           </a>
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-
-            <div class="navbar-dropdown">
-              <a class="navbar-item {{ 'is-selected' if active_page == 'about' else '' }}" href="{{ url_for('about') }}">
-                About
-              </a>
-              <a class="navbar-item {{ 'is-selected' if active_page == 'work' else '' }}" href="{{ url_for('work') }}">
-                Work
-              </a>
-              <a class="navbar-item {{ 'is-selected' if active_page == 'hobbies' else '' }}" href="{{ url_for('hobbies') }}">
-                Hobbies
-              </a>
-              <a class="navbar-item {{ 'is-selected' if active_page == 'education' else '' }}" href="{{ url_for('education') }}">
-                Education
-              </a>
-              <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">
-                Contact
-              </a>
-              <hr class="navbar-divider">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
         </div>
 
       </div>
