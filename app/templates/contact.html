@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1 class="title">Contact Me</h1>
+    <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+                <input class="input" type="text" name="name" placeholder="Your Name">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+                <input class="input" type="email" name="email" placeholder="Your Email">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+                <textarea class="textarea" name="message" placeholder="Your Message"></textarea>
+            </div>
+        </div>
+        <div class="control">
+            <button class="button is-primary" type="submit">Send</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

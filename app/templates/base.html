@@ -14,8 +14,7 @@
         href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/81fe88e261.js" crossorigin="anonymous"></script>
 
-    {% block stylesheets %}
-    {% endblock %}
+    <link rel="stylesheet" href="./static/styles/base.css">
 
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
     <title>{% block title %}{% endblock %}</title>
@@ -36,35 +35,25 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-          <a class="navbar-item">
+          <a class="navbar-item {{ 'is-selected' if active_page == 'home' else '' }}" href="{{ url_for('index') }}">
             Home
           </a>
-
-          <a class="navbar-item">
-            Documentation
+          <a class="navbar-item {{ 'is-selected' if active_page == 'about' else '' }}" href="{{ url_for('about') }}">
+            About
+          </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'work' else '' }}" href="{{ url_for('work') }}">
+            Work
+          </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'hobbies' else '' }}" href="{{ url_for('hobbies') }}">
+            Hobbies
+          </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'education' else '' }}" href="{{ url_for('education') }}">
+            Education
+          </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">
+            Contact Me
           </a>
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                About
-              </a>
-              <a class="navbar-item is-selected">
-                Jobs
-              </a>
-              <a class="navbar-item">
-                Contact
-              </a>
-              <hr class="navbar-divider">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
         </div>
 
       </div>
