@@ -12,6 +12,28 @@ a {
     color: inherit;
 }
 
-a:hover {
+a:hover:not(.card-link) {
     text-decoration: underline;
+}
+
+.card {
+  transition: box-shadow 0.3s ease;
+
+}
+
+.card:hover {
+  box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
+}
+
+/* Make card actually hover */
+a.card-link:hover {
+
+  div.media-content {
+    text-decoration: underline;
+  }
+
+}
+
+#map {
+  height: 70vh;
 }

@@ -14,6 +14,9 @@
         href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/81fe88e261.js" crossorigin="anonymous"></script>
 
+    {% block scripts %}
+    {% endblock %}
+
     <link rel="stylesheet" href="./static/styles/base.css">
 
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
@@ -44,11 +47,8 @@
           <a class="navbar-item {{ 'is-selected' if active_page == 'work' else '' }}" href="{{ url_for('work') }}">
             Work
           </a>
-          <a class="navbar-item {{ 'is-selected' if active_page == 'hobbies' else '' }}" href="{{ url_for('hobbies') }}">
-            Hobbies
-          </a>
-          <a class="navbar-item {{ 'is-selected' if active_page == 'education' else '' }}" href="{{ url_for('education') }}">
-            Education
+          <a class="navbar-item {{ 'is-selected' if active_page == 'projects' else '' }}" href="{{ url_for('projects') }}">
+            Projects
           </a>
           <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">
             Contact Me
