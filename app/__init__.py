@@ -27,7 +27,34 @@ def about():
 
 @app.route('/work')
 def work():
-    return render_template('work.html', title="Work Experience", active_page = 'work')
+    work_experiences = [
+        {
+            "role": "Role Name",
+            "company": "Company Name",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dates": "June 2024 - Present",
+            "link": "http://www.google.com",
+            "img_url": url_for('static', filename='img/logo.jpg')
+        },
+        {
+            "role": "Role Name",
+            "company": "Company Name",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dates": "June 2024 - Present",
+            "link": "http://www.google.com",
+            "img_url": url_for('static', filename='img/logo.jpg')
+        },
+        {
+            "role": "Role Name",
+            "company": "Company Name",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "dates": "June 2024 - Present",
+            "link": "http://www.google.com",
+            "img_url": url_for('static', filename='img/logo.jpg')
+        }
+    ] 
+    
+    return render_template('work.html', title="Work Experience", active_page = 'work', work_experiences=work_experiences)
 
 @app.route('/projects')
 def projects():
