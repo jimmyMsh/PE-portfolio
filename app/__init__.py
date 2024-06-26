@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,7 +12,18 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title="About Me", active_page = 'about')
+    hobbies = [
+        {"name": "Working out", "description": "Love to workout ", "img_url": url_for('static', filename='img/gym.jpg')},
+        {"name": "Traveling", "description": "Exploring new places, especially around the city", "img_url": url_for('static', filename='img/traveling.jpg')},
+        {"name": "Eating out", "description": "Trying different restaurant cuisines", "img_url": url_for('static', filename='img/restaurant.jpg')},
+        {"name": "Programing", "description": "Learning new programing concepts!", "img_url": url_for('static', filename='img/Programing.jpg')},
+    ]
+    
+    # If you prefer a separate loop for adding URLs, use the following:
+    # for hobby in hobbies:
+    #     hobby['img_url'] = url_for('static', filename='img/' + hobby['img'])
+    
+    return render_template('about.html', title="About Me", active_page = 'about', hobbies = hobbies)
 
 @app.route('/work')
 def work():
