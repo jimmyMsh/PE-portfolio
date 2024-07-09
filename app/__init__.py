@@ -86,20 +86,9 @@ def projects():
 
     projects = [
         {
-            "title": "GT Reserve",
-            "tech": ", ".join(["AWS", "Python", "Javascript", "ReactJS", "Selenium"]),
-            "description": "Student-friendly alternative site to book study rooms at Georgia Tech. AWS Lambda fuctions run Selenium web automation scripts to update availabilities every 10 minutes and display them on a interactive dashboard powered by ReactJS.",
-            "url": "https://gt-reserve.vercel.app/",
-            "img_url": url_for("static", filename="img/projects/gt-reserve.png"),
-            "github_url": "https://github.com/VigneshSK17/gt-reserve-scraper"
-        },
-        {
-            "title": "Cubimer",
-            "tech": ", ".join(["Dart", "Flutter", "Local Storage", "Cloudflare", "Git"]),
-            "description": "An elegant and effective cubing timer that allows you to save your solve times locally on various different platforms, from web to desktop. Enabled by Flutter & Dart and utilizes cross-platform state management to store times. Hosted the web version of the app on Cloudflare Pages to ensure fast loading times and reliable access worldwide.",
-            "url": "https://cubimer.pages.dev/#/",
-            "img_url": url_for('static', filename='img/projects/cubimer.png'),
-            "github_url": "https://github.com/VigneshSK17/cubimer"
+            "title": "Prerequisite Checker",
+            "description": "Java program for university course prerequisite analysis, potentially assisting students in identifying course prereqs and resolving class-related queries, showcasing data structures and graph theory application. Architected a DAG with adjacency lists for efficient course prerequisite modeling. Applied depth-first search and cycle detection algorithms for efficient graph traversal. Formulated file I/O strategies to enhance data accuracy and error resilience.",
+            "github_url": "https://github.com/jimmyMsh/PreReqChecker"
         },
         {
             "title": "Personal Website",
