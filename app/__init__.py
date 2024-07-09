@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, url_for
 from dotenv import load_dotenv
 from peewee import *
+import datetime
 
 load_dotenv()
 app = Flask(__name__)
@@ -19,6 +20,21 @@ mydb = MySQLDatabase(db_name,
 )
 
 print(mydb)
+
+# Create DB model that reflects fields for timeline posts
+class TimelinePost(Model):
+    name = CharField()
+    email = CharField()
+    content = TextField()
+    created_at = DateTimeField(default=datetime.datetime.now)
+    
+    class Meta:
+        database = mydb
+
+# Connect to db
+mydb.connect
+# Add the above defined table
+mydb.create_tables([TimelinePost])
 
 @app.route('/')
 def index():
