@@ -22,7 +22,18 @@ print(mydb)
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), active_page = 'home', mapsApiKey=os.getenv("MAPS_API_KEY"))
+
+    # Formatted as [latitude, longitude, description]
+    # latitude: S is negative, longitude: W is negative
+    locations = [
+        [34.0708, -84.2772, "Alpharetta, GA, USA - Hometown"],
+        [40.5804, -74.2851, "Avenel, NJ, USA - Previously Lived"],
+        [1.3521, 103.8198, "Singapore - Previously Lived"],
+        [13.0843, 80.2705, "Chennai, India - Birthplace"],
+        [33.7756, -84.3963, "Georgia Tech - Pursuing BS in CS"]
+    ]
+
+    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), active_page = 'home', mapsApiKey=os.getenv("MAPS_API_KEY"), locations=locations)
 
 @app.route('/about')
 def about():
@@ -32,11 +43,11 @@ def about():
         {"name": "Eating out", "description": "Trying different restaurant cuisines", "img_url": url_for('static', filename='img/restaurant.jpg')},
         {"name": "Programing", "description": "Learning new programing concepts!", "img_url": url_for('static', filename='img/Programing.jpg')},
     ]
-    
+
     # If you prefer a separate loop for adding URLs, use the following:
     # for hobby in hobbies:
     #     hobby['img_url'] = url_for('static', filename='img/' + hobby['img'])
-    
+
     return render_template('about.html', title="About Me", active_page = 'about', hobbies = hobbies)
 
 @app.route('/work')
@@ -66,8 +77,8 @@ def work():
             "link": "http://www.google.com",
             "img_url": url_for('static', filename='img/logo.jpg')
         }
-    ] 
-    
+    ]
+
     return render_template('work.html', title="Work Experience", active_page = 'work', work_experiences=work_experiences)
 
 @app.route('/projects')
@@ -75,9 +86,20 @@ def projects():
 
     projects = [
         {
-            "title": "Prerequisite Checker",
-            "description": "Java program for university course prerequisite analysis, potentially assisting students in identifying course prereqs and resolving class-related queries, showcasing data structures and graph theory application. Architected a DAG with adjacency lists for efficient course prerequisite modeling. Applied depth-first search and cycle detection algorithms for efficient graph traversal. Formulated file I/O strategies to enhance data accuracy and error resilience.",
-            "github_url": "https://github.com/jimmyMsh/PreReqChecker"
+            "title": "GT Reserve",
+            "tech": ", ".join(["AWS", "Python", "Javascript", "ReactJS", "Selenium"]),
+            "description": "Student-friendly alternative site to book study rooms at Georgia Tech. AWS Lambda fuctions run Selenium web automation scripts to update availabilities every 10 minutes and display them on a interactive dashboard powered by ReactJS.",
+            "url": "https://gt-reserve.vercel.app/",
+            "img_url": url_for("static", filename="img/projects/gt-reserve.png"),
+            "github_url": "https://github.com/VigneshSK17/gt-reserve-scraper"
+        },
+        {
+            "title": "Cubimer",
+            "tech": ", ".join(["Dart", "Flutter", "Local Storage", "Cloudflare", "Git"]),
+            "description": "An elegant and effective cubing timer that allows you to save your solve times locally on various different platforms, from web to desktop. Enabled by Flutter & Dart and utilizes cross-platform state management to store times. Hosted the web version of the app on Cloudflare Pages to ensure fast loading times and reliable access worldwide.",
+            "url": "https://cubimer.pages.dev/#/",
+            "img_url": url_for('static', filename='img/projects/cubimer.png'),
+            "github_url": "https://github.com/VigneshSK17/cubimer"
         },
         {
             "title": "Personal Website",
@@ -90,7 +112,7 @@ def projects():
             "github_url": "https://github.com/jimmyMsh/Data-Structures/tree/master/MusicPlaylist"
         }
     ]
-    
+
     return render_template('projects.html', title="projects", active_page = 'projects', projects = projects)
 
 @app.route('/contact')

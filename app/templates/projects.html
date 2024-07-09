@@ -6,33 +6,35 @@
 <section class="section">
     <h1 class="title">Projects</h1>
 
-    <div class="columns is-multiline">
+    <div class="grid is-col-min-12 gap-4">
         {% for project in projects %}
-        <div class="column is-one-third">
-            <div class="card">
-                <div class="card-content">
-                    <p class="title">
-                        {{ project.title }}
-                    </p>
-                    <p class="subtitle">
-                        {{ project.description }}
-                    </p>
+        <div class="cell">
+            <a href="{{ project.url if project.url else 'javascript:;' }}" class="card-link">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4x3">
+                            <img src="{{ project.img_url }}" alt="Project image change this">
+                        </figure>
+                    </div>
+                    <div class="media-content p-3">
+                        <div class="columns">
+                            <div class="column">
+                                <p class="title">{{ project.title }}</p>
+                                <p class="subtitle is-6">{{ project.tech }}</p>
+                            </div>
+                            <div class="column" align="right">
+                                <a href="{{ project.github_url }}" class="button">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>GitHub</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content px-3 pb-3">{{ project.description }}</div>
                 </div>
-                <footer class="card-footer">
-                    <p class="card-footer-item">
-                        <span>
-                            View on 
-                            <a href="{{ project.github_url }}">GitHub</a>
-                        </span>
-                    </p>
-                    <p class="card-footer-item">
-                        <span>
-                            Share on 
-                            <a href="#">Facebook</a>
-                        </span>
-                    </p>
-                </footer>
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>

@@ -25,10 +25,9 @@ a:hover:not(.card-link) {
   box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
 }
 
-/* Make card actually hover */
 a.card-link:hover {
 
-  div.media-content {
+  p.title {
     text-decoration: underline;
   }
 
