@@ -1,7 +1,10 @@
+blinker==1.8.2
 cffi==1.15.0
 click==8.0.1
+colorama==0.4.6
 cryptography==37.0.2
 Flask==2.0.1
+Flask-DotEnv==0.1.2
 itsdangerous==2.0.1
 Jinja2==3.0.1
 MarkupSafe==2.0.1
@@ -9,4 +12,5 @@ peewee==3.14.10
 pycparser==2.21
 PyMySQL==1.0.2
 python-dotenv==0.17.1
+setuptools==70.2.0
 Werkzeug==2.0.1
