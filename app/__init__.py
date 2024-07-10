@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, jsonify
 from dotenv import load_dotenv
 from peewee import *
 import datetime
@@ -37,13 +37,18 @@ mydb.connect()
 # Add the above defined table
 mydb.create_tables([TimelinePost])
 
+# ------------------------------ API endpoint definitions ------------------------------
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
+    # Retrieve the value from the form data submitted with the POST request
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
+    
+    # Create a new TimelinePost record in the database with the retrieved form data
     timeline_post = TimelinePost.create(name = name, email = email, content = content)
     
+    # Convert the created TimelinePost model instance to a dictionary and return it as the response
     return model_to_dict(timeline_post)
 
 @app.route('/api/timeline_post', methods=['GET'])
@@ -51,10 +56,25 @@ def get_time_line_post():
     return {
     'timeline_posts':
         [
-            model_to_dict(p)
-            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+             # Fetch all TimelinePost records from the database, ordered by 'created_at' in descending order
+            model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
+
+@app.route('/api/timeline_post/<int:post_id>', methods = ['DELETE'])
+def delete_time_line_post(post_id):
+    try:
+        # Attempt to get post by ID
+        post = TimelinePost.get_by_id(post_id)
+        # If found, delete the post
+        post.delete_instance()
+        # Return a message with the status code 200
+        return jsonify({'message': 'Timeline post deleted successfully'}), 200
+    except TimelinePost.DoesNotExist:
+        # If the post does not exist, return an error message with status code 404
+        return jsonify({'error': 'Timeline post not found'}), 404
+
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ API endpoint definitions ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 @app.route('/')
 def index():
