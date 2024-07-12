@@ -1,12 +1,14 @@
 import os
-from flask import Flask, render_template, request, url_for, jsonify
+from flask import Flask, render_template, request, url_for, jsonify, redirect
 from dotenv import load_dotenv
 from peewee import *
 import datetime
 from playhouse.shortcuts import model_to_dict
+import hashlib
 
 load_dotenv()
 app = Flask(__name__)
+app.config['DEBUG'] = True
 
 db_host = os.getenv('MYSQL_HOST')
 db_user = os.getenv('MYSQL_USER')
@@ -36,6 +38,20 @@ class TimelinePost(Model):
 mydb.connect()
 # Add the above defined table
 mydb.create_tables([TimelinePost])
+
+# Formats the datetime so that it is consistent on template page
+@app.template_filter('format_datetime')
+def format_datetime(value):
+    if value is None:
+        return ""
+    return value.strftime('%Y-%m-%d %H:%M:%S')
+
+# Helper function to create a hash of the email so that it could be used to fetch the emails
+@app.template_filter('to_md5')
+def to_md5_filter(email):
+    import hashlib
+    result = hashlib.md5(email.strip().lower().encode('utf-8')).hexdigest()
+    return result
 
 # ------------------------------ API endpoint definitions ------------------------------
 @app.route('/api/timeline_post', methods=['POST'])
@@ -163,6 +179,20 @@ def projects():
 @app.route('/contact')
 def contact():
     return render_template('contact.html', title="Contact", active_page = 'contact')
+
+@app.route('/timeline', methods=['GET', 'POST'])
+def timeline():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        content = request.form['content']
+        
+        TimelinePost.create(name=name, email=email, content=content)
+        
+        return redirect(url_for('timeline'))
+
+    timeline_posts = [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
+    return render_template('timeline.html', title="Timeline", active_page='timeline', timeline_posts=timeline_posts)
 
 if __name__ == '__main__':
     app.run(debug=True)

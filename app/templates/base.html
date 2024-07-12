@@ -50,6 +50,9 @@
           <a class="navbar-item {{ 'is-selected' if active_page == 'projects' else '' }}" href="{{ url_for('projects') }}">
             Projects
           </a>
+          <a class="navbar-item {{ 'is-selected' if active_page == 'timeline' else '' }}" href="{{ url_for('timeline') }}">
+            Timeline
+          </a>            
           <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">
             Contact Me
           </a>
