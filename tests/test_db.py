@@ -1,5 +1,3 @@
-# test_db.py
-
 import unittest
 from peewee import *
 
