@@ -15,12 +15,17 @@ db_user = os.getenv('MYSQL_USER')
 db_password = os.getenv('MYSQL_PASSWORD')
 db_name = os.getenv('MYSQL_DB')
 
-mydb = MySQLDatabase(db_name,
-    user=db_user,
-    password=db_password,
-    host=db_host,
-    port=3306
-)
+# Initializing mydb with a temporary in-memory sqlite database for testing
+if os.getenv("TESTING") == 'true':
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(db_name,
+        user=db_user,
+        password=db_password,
+        host=db_host,
+        port=3306
+    )
 
 print(mydb)
 
