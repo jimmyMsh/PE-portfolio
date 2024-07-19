@@ -61,10 +61,22 @@ def to_md5_filter(email):
 # ------------------------------ API endpoint definitions ------------------------------
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    # Retrieve the value from the form data submitted with the POST request
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
+    # Retrieve form data and validate
+    name = request.form.get('name')
+    email = request.form.get('email')
+    content = request.form.get('content')
+
+    # Validate 'name' to ensure it is not empty
+    if not name:
+        return "Invalid name", 400
+
+    # Validate 'email' to check for presence and basic format
+    if not email or '@' not in email:
+        return "invalid email", 400  
+
+    # Validate 'content' to ensure it is not empty
+    if not content:
+        return "Invalid content", 400
     
     # Create a new TimelinePost record in the database with the retrieved form data
     timeline_post = TimelinePost.create(name = name, email = email, content = content)
