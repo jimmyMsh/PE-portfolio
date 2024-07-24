@@ -13,7 +13,7 @@ app.config['DEBUG'] = True
 db_host = os.getenv('MYSQL_HOST')
 db_user = os.getenv('MYSQL_USER')
 db_password = os.getenv('MYSQL_PASSWORD')
-db_name = os.getenv('MYSQL_DB')
+db_name = os.getenv('MYSQL_DATABASE')
 
 # Initializing mydb with a temporary in-memory sqlite database for testing
 if os.getenv("TESTING") == 'true':
