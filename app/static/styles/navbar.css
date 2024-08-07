@@ -1,0 +1,28 @@
+/* navbar.css */
+
+.navbar {
+  background-color: black;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.navbar-item {
+  color: white;
+  background-color: transparent;
+  border-radius: 25px;
+  margin: 0 5px;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-item:hover,
+.navbar-item.is-selected {
+  background-color: white;
+  color: black;
+}
