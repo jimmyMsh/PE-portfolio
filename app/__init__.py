@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from peewee import *
 import datetime
 from playhouse.shortcuts import model_to_dict
-import hashlib
 
 load_dotenv()
 app = Flask(__name__)
@@ -122,7 +121,7 @@ def index():
         [33.7756, -84.3963, "Georgia Tech - Pursuing BS in CS"]
     ]
 
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), active_page = 'home', mapsApiKey=os.getenv("MAPS_API_KEY"), locations=locations)
+    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), active_page = 'home', locations=locations)
 
 @app.route('/about')
 def about():
@@ -133,38 +132,46 @@ def about():
         {"name": "Programing", "description": "Learning new programing concepts!", "img_url": url_for('static', filename='img/Programing.jpg')},
     ]
 
-    # If you prefer a separate loop for adding URLs, use the following:
-    # for hobby in hobbies:
-    #     hobby['img_url'] = url_for('static', filename='img/' + hobby['img'])
-
     return render_template('about.html', title="About Me", active_page = 'about', hobbies = hobbies)
 
 @app.route('/work')
 def work():
     work_experiences = [
         {
-            "role": "Role Name",
-            "company": "Company Name",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            "dates": "June 2024 - Present",
-            "link": "http://www.google.com",
-            "img_url": url_for('static', filename='img/logo.jpg')
+            "role": "Self Employed Personal Trainer",
+            "company": "Jimmy Mishan Personal Training",
+            "description": (
+                "Launched and managed a personal training business, utilizing data analysis to track client progress "
+                "and develop customized training plans. Effectively communicated with clients to set goals and provide progress updates. "
+                "Used social media for client acquisition and maintained flexibility in scheduling."
+            ),
+            "dates": "Aug 2022 - Jan 2024",
+            "link": "https://www.linkedin.com/in/jimmymishan/",
+            "img_url": "https://picsum.photos/200/300"
         },
         {
-            "role": "Role Name",
-            "company": "Company Name",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "role": "Information Technology Intern",
+            "company": "New Jersey Courts (Supreme Court of NJ)",
+            "description": (
+                "Developed an asynchronous Node.js application for processing CSV and JSON files, improving data integrity "
+                "and reducing manual data entry time by 50%. Initiated the development of a mobile attendance system using Ionic and Angular, "
+                "and implemented data validation techniques to achieve 99.9% accuracy."
+            ),
             "dates": "June 2024 - Present",
-            "link": "http://www.google.com",
-            "img_url": url_for('static', filename='img/logo.jpg')
+            "link": "https://www.njcourts.gov/",
+            "img_url": "https://picsum.photos/200/300"
         },
         {
-            "role": "Role Name",
-            "company": "Company Name",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "role": "Production Engineering Fellow",
+            "company": "Meta (via MLH)",
+            "description": (
+                "Engineered and deployed a multi-component web application with Flask, MySQL, and NGINX, achieving 99% uptime. "
+                "Developed Bash scripts for automated API endpoint testing and application updates. Containerized the application using Docker, "
+                "reducing deployment time by 50% and improving scalability."
+            ),
             "dates": "June 2024 - Present",
-            "link": "http://www.google.com",
-            "img_url": url_for('static', filename='img/logo.jpg')
+            "link": "https://fellowship.mlh.io/",
+            "img_url": "https://picsum.photos/200/300"
         }
     ]
 

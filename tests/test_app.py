@@ -17,7 +17,6 @@ class AppTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         assert '<p class="title">Personal Portfolio</p>' in html
         assert '<h1 class="title">About Me</h1>' in html
-        assert 'href="./static/styles/base.css"' in html
     
     def test_timeline(self):
         # Response of getting a timeline post - when nothing is added yet

@@ -1,0 +1,28 @@
+/* Dark mode overrides for Bulma */
+body {
+    background: linear-gradient(135deg, #B2AA9D, #17202D, #694542, #795940);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white; /* Default text color */
+  }
+  
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 100% 75%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 0% 25%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  footer {
+    margin-top: auto;
+  }
+  
+  h1, h2, h3, h4, h5, h6, p, a, li, .card .title, .card .subtitle, .card .content {
+    color: white; /* Make all text white */
+    font-weight: bold; /* Make all text bold */
+  }
+  

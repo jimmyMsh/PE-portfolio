@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="has-navbar-fixed-top" data-theme="light">
-
+<html lang="en" class="has-navbar-fixed-top" data-theme="dark">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,25 +8,23 @@
     <meta property="og:description" content="My Personal Portfolio">
     <meta property="og:url" content="{{ url }}">
 
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-prefers-dark@0.1.1/css/bulma-prefers-dark.min.css">
     <script src="https://kit.fontawesome.com/81fe88e261.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
 
     {% block scripts %}
     {% endblock %}
 
-    <link rel="stylesheet" href="./static/styles/base.css">
 
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
     <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body>
-
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -35,7 +32,6 @@
           <span aria-hidden="true"></span>
         </a>
       </div>
-
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
           <a class="navbar-item {{ 'is-selected' if active_page == 'home' else '' }}" href="{{ url_for('index') }}">
@@ -56,39 +52,25 @@
           <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">
             Contact Me
           </a>
-
         </div>
-
       </div>
     </nav>
 
-     {% block content %}
-     {% endblock %}
+    {% block content %}
+    {% endblock %}
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+        $navbarBurgers.forEach( el => {
+          el.addEventListener('click', () => {
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      });
+    </script>
 </body>
-
-<script>
-
-  document.addEventListener('DOMContentLoaded', () => {
-
-  // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-  // Add a click event on each of them
-  $navbarBurgers.forEach( el => {
-    el.addEventListener('click', () => {
-
-      // Get the target from the "data-target" attribute
-      const target = el.dataset.target;
-      const $target = document.getElementById(target);
-
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      el.classList.toggle('is-active');
-      $target.classList.toggle('is-active');
-
-    });
-  });
-
-});
-
-</script>
+</html>
