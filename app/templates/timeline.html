@@ -2,86 +2,78 @@
 
 {% block title %}Timeline Posts{% endblock %}
 
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/timeline.css') }}">
+{% endblock %}
+
 {% block content %}
 <section class="section">
-    <h1 class="title">Create a timeline post</h1>
+    <div class="container">
+        <h1 class="title">Create a timeline post</h1>
 
-    <form id="timeline-form" method="POST" action="{{ url_for('timeline') }}">
-        <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-                <input class="input" type="text" name="name" placeholder="Your name" required>
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left has-icons-right">
-                <input class="input" type="email" name="email" placeholder="Your email" required>
-                <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                </span>
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Content</label>
-            <div class="control">
-                <textarea class="textarea" name="content" placeholder="Your message" required></textarea>
-            </div>
-        </div>
-
-        <div class="field is-grouped">
-            <div class="control">
-                <button class="button is-link" type="submit">Submit</button>
-            </div>
-            <div class="control">
-                <button class="button is-link is-light" type="reset">Cancel</button>
-            </div>
-        </div>
-    </form>
-
-    <div id="posts" class="section">
-        {% for post in timeline_posts %}
-        <div class="box">
-            <article class="media">
-                <div class="media-left">
-                    <figure class="image is-48x48">
-                        <img src="https://www.gravatar.com/avatar/{{ post.email | to_md5 }}?s=48&d=identicon" alt="Profile image">
-                    </figure>
+        <form id="timeline-form" method="POST" action="{{ url_for('timeline') }}">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="name" placeholder="Your name" required>
                 </div>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>{{ post.name }}</strong> <small>{{ post.email }}</small> <br>
-                            {{ post.content }}
-                        </p>
+            </div>
+
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="email" name="email" placeholder="Your email" required>
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Content</label>
+                <div class="control">
+                    <textarea class="textarea" name="content" placeholder="Your message" required></textarea>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link" type="submit">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light" type="reset">Cancel</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="posts" class="section">
+            {% for post in timeline_posts %}
+            <div class="box">
+                <article class="media">
+                    <div class="media-left is-hidden-mobile">
+                        <figure class="image is-48x48">
+                            <img src="https://www.gravatar.com/avatar/{{ post.email | to_md5 }}?s=48&d=identicon" alt="Profile image">
+                        </figure>
                     </div>
-                </div>
-                <div class="media-right">
-                    <small class="post-date" data-date="{{ post.created_at | format_datetime }}"></small>
-                </div>
-            </article>
+                    <div class="media-content">
+                        <div class="content">
+                            <div class="post-metadata">
+                                <strong>{{ post.name }}</strong>
+                                <small class="email">{{ post.email }}</small>
+                                <small class="post-date" data-date="{{ post.created_at }}"></small>
+                            </div>
+                            <p class="post-content">{{ post.content }}</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </section>
+{% endblock %}
 
-<script>
-    document.getElementById('timeline-form').addEventListener('submit', function(event) {
-        alert('Form submitted successfully! Redirecting...');
-    });
-
-    // Function to format dates
-    function formatDates() {
-        const dateElements = document.querySelectorAll('.post-date');
-        dateElements.forEach(el => {
-            const date = new Date(el.getAttribute('data-date'));
-            el.textContent = date.toLocaleString();
-        });
-    }
-
-    // Initial call to format existing dates
-    formatDates();
-</script>
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/timeline.js') }}"></script>
 {% endblock %}

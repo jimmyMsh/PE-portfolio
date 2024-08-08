@@ -1,33 +1,32 @@
 {% extends "base.html" %}
 
 {% block scripts %}
-
 <!-- Leaflet.js for map -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+<!-- Page-specific CSS and JS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+<script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
-
 <section class="hero is-medium">
     <div class="hero-body">
-        <div class="container is-centered">
-            <div class="columns is-vcentered">
-                <div class="column">
-                    <p class="title">Personal Portfolio</p>
-                    <p class="subtitle">A place to showcase stuff</p>
-                </div>
+        <div class="container has-text-centered">
+            <h1 class="title is-1 welcome-message">Welcome to my portfolio</h1>
+            
+            <div class="columns is-centered mt-6">
                 <div class="column is-narrow">
-                    <figure class="image is-128x128">
-                      <img class="is-rounded" src="./static/img/logo.jpg" alt="Profile picture"/>
+                    <figure class="image is-128x128 is-inline-block">
+                        <img class="is-rounded" src="./static/img/logo.jpg" alt="Profile picture"/>
                     </figure>
 
-                    <div class="container m-3">
+                    <div class="mt-4">
                         <div class="icon-text">
                             <a href="mailto:vignesh.sureshkumar@gatech.edu">
                                 <span class="icon">
-                                  <i class="fas fa-md fa-envelope"></i>
+                                    <i class="fas fa-md fa-envelope"></i>
                                 </span>
                                 <span>mail@google.com</span>
                             </a>
@@ -35,7 +34,7 @@
                         <div class="icon-text">
                             <a href="https://github.com/vigneshsk17">
                                 <span class="icon">
-                                  <i class="fa-brands fa-md fa-github"></i>
+                                    <i class="fa-brands fa-md fa-github"></i>
                                 </span>
                                 <span>github username</span>
                             </a>
@@ -43,58 +42,32 @@
                         <div class="icon-text">
                             <a href="https://linkedin.com/in/vigneshsk1">
                                 <span class="icon">
-                                  <i class="fa-brands fa-md fa-linkedin"></i>
+                                    <i class="fa-brands fa-md fa-linkedin"></i>
                                 </span>
                                 <span>linkedin username</span>
                             </a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section is-small">
+<section class="section is-small has-text-centered">
     <h1 class="title">About Me</h1>
     <h2 class="subtitle">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </h2>
-
 </section>
 
 <section class="section">
-    <h1 class="title">Where I've Been</h1>
+    <h1 class="title has-text-centered">Where I've Been</h1>
 
     <div class="columns is-centered">
-
         <div id="map" class="column mx-5 my-3"></div>
     </div>
-
-
 </section>
 
-<input type="hidden"  id="locations_id" value="{{ locations }}">
-
-<script>
-
-    const locationsStr = document.querySelector("#locations_id").value
-    const locations = eval(locationsStr)
-
-    var map = L.map("map").setView([locations[0][0], locations[0][1]], 3);
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-
-    for (const [lat, lng, desc] of locations) {
-        L.marker([lat, lng]).addTo(map).bindPopup(desc);
-    }
-
-</script>
-
+<input type="hidden" id="locations_id" value="{{ locations }}">
 {% endblock %}
