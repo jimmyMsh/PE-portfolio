@@ -1,0 +1,25 @@
+.welcome-message {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 1.5s, transform 1.5s;
+}
+
+.welcome-message.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+#map {
+    height: 70vh;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.icon-text .icon {
+    margin-right: 0.5rem;
+}

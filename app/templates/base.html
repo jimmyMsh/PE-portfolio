@@ -12,57 +12,41 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-prefers-dark@0.1.1/css/bulma-prefers-dark.min.css">
     <script src="https://kit.fontawesome.com/81fe88e261.js" crossorigin="anonymous"></script>
 
+    {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
-
-    {% block scripts %}
     {% endblock %}
 
-
-    <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
+    <link rel='icon' href="{{ url_for('static', filename='img/favicon.ico') }}" type='image/x-icon' />
     <title>{% block title %}{% endblock %}</title>
 </head>
-
 <body>
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-          <a class="navbar-item {{ 'is-selected' if active_page == 'home' else '' }}" href="{{ url_for('index') }}">
-            Home
-          </a>
-          <a class="navbar-item {{ 'is-selected' if active_page == 'about' else '' }}" href="{{ url_for('about') }}">
-            About
-          </a>
-          <a class="navbar-item {{ 'is-selected' if active_page == 'work' else '' }}" href="{{ url_for('work') }}">
-            Work
-          </a>
-          <a class="navbar-item {{ 'is-selected' if active_page == 'projects' else '' }}" href="{{ url_for('projects') }}">
-            Projects
-          </a>
-          <a class="navbar-item {{ 'is-selected' if active_page == 'timeline' else '' }}" href="{{ url_for('timeline') }}">
-            Timeline
-          </a>            
-          <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">
-            Contact Me
-          </a>
+        <div class="navbar-brand">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
         </div>
-      </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+                <a class="navbar-item {{ 'is-selected' if active_page == 'home' else '' }}" href="{{ url_for('index') }}">Home</a>
+                <a class="navbar-item {{ 'is-selected' if active_page == 'about' else '' }}" href="{{ url_for('about') }}">About</a>
+                <a class="navbar-item {{ 'is-selected' if active_page == 'work' else '' }}" href="{{ url_for('work') }}">Work</a>
+                <a class="navbar-item {{ 'is-selected' if active_page == 'projects' else '' }}" href="{{ url_for('projects') }}">Projects</a>
+                <a class="navbar-item {{ 'is-selected' if active_page == 'timeline' else '' }}" href="{{ url_for('timeline') }}">Timeline</a>            
+                <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">Contact Me</a>
+            </div>
+        </div>
     </nav>
 
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-        $navbarBurgers.forEach( el => {
+        $navbarBurgers.forEach(el => {
           el.addEventListener('click', () => {
             const target = el.dataset.target;
             const $target = document.getElementById(target);
@@ -72,5 +56,8 @@
         });
       });
     </script>
+
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>
