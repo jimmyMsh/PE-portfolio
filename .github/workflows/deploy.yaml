@@ -1,15 +1,15 @@
 name: Deploy
-
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_run:
+    workflows: ['Run Tests']
+    types:
+      - completed
+  workflow_dispatch: # Allows manual triggering of the deploy workflow
 
 jobs:
   deploy:
-    name: "Deploy to VPS"
     runs-on: ubuntu-latest
+    name: Deploy to VPS
     steps:
       - name: Configure SSH
         run: |
@@ -29,4 +29,18 @@ jobs:
           SSH_IP: ${{ secrets.SSH_IP }}
 
       - name: Deploy site
-        run: ssh my-vps '~/pe-portfolio-site/scripts/redeploy-site.sh'
+        id: deploy
+        run: ssh my-vps '${{ secrets.PROJECT_ROOT }}/scripts/redeploy-site.sh'
+        continue-on-error: true
+
+      - name: Print Docker container status after deployment
+        if: steps.deploy.outcome == 'success'
+        run: ssh my-vps 'docker compose -f ${{ secrets.PROJECT_ROOT }}/docker-compose.prod.yml ps'
+      
+      - name: Send successful result to discord server
+        if: steps.deploy.outcome == 'success'
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful"
+
+      - name: Send failure result to discord server
+        if: failure()
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed"
