@@ -58,6 +58,44 @@ def to_md5_filter(email):
     return result
 
 # ------------------------------ API endpoint definitions ------------------------------
+@app.route('/api/health')
+def check_website_health():
+    # Load API key
+    TEST_HEALTH_CHECK_API_KEY = os.getenv('TEST_HEALTH_CHECK_API_KEY')
+    # Check for API key to use this header
+    if request.headers.get('Testing-API-Key') != TEST_HEALTH_CHECK_API_KEY:
+        return "Invalid Request", 403 # Forbidden
+    
+    # Otherwise, create return JSON for the status of the web health
+    status = {
+        'template_rendering' : 'Healthy',
+        'database_connection' : 'Healthy',
+        'db_write_delete' : 'Healthy'
+    }
+    
+    # Test the if the main page template can render
+    try:
+        render_template('index.html')
+    except Exception as e:
+        status['template_rendering'] = f'Unhealthy: {str(e)}'
+    
+    # Next, test if we the database is responsive
+    try:
+        TimelinePost.select().limit(1).execute()
+    except Exception as e:
+        status['database_connection'] = f'Unhealthy: {str(e)}'
+        
+    try:
+        test_post = TimelinePost.create(name = 'Jimmy', email = 'Jim@test.com', content = 'Some test content')
+        test_post.delete_instance()
+    except Exception as e:
+        status['db_write_delete'] = f'Unhealthy: {str(e)}'
+        
+    # Generate error status code if either test failed. 
+    status_code = 200 if all(response == "Healthy" for response in status.values()) else 500
+    
+    return status, status_code 
+        
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     # Retrieve form data and validate
