@@ -1,7 +1,7 @@
 .post-metadata {
     margin-bottom: 0.5rem;
-    overflow-x: scroll; /* Add horizontal scroll if needed */
-    overflow-y: scroll;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 .post-metadata strong {
     display: block;
@@ -16,8 +16,8 @@
 }
 .post-content {
     margin-top: 0.5rem;
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 @media screen and (max-width: 768px) {
