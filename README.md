@@ -80,7 +80,7 @@ Security features include:
 3. Build and run the Docker container with the `docker-compose.local.yml` file in the root directory:
 
     ```bash
-    docker-compose -f docker-compose.local.yml up --build
+    docker compose -f docker-compose.local.yml up --build
     ```
 
 4. Access the application at `http://localhost:5000`.
@@ -90,7 +90,7 @@ Security features include:
 5. To stop the application, use:
 
     ```bash
-    docker-compose -f docker-compose.local.yml down
+    docker compose -f docker-compose.local.yml down
     ```
 
     > **Note:** This local setup is for development purposes only. For production deployment, use the original `docker-compose.prod.yml` configuration with proper SSL and Nginx setup.
