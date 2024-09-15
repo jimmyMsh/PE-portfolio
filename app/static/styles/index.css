@@ -11,6 +11,7 @@
 
 #map {
     height: 70vh;
+    z-index: 1;
 }
 
 .icon-text {
