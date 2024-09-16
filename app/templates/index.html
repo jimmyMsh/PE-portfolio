@@ -54,11 +54,22 @@
     </div>
 </section>
 
-<section class="section is-small has-text-centered">
-    <h1 class="title">About Me</h1>
-    <h2 class="subtitle">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </h2>
+<section class="section is-small">
+    <h1 class="title has-text-centered">My Resume</h1>
+    <div class="columns is-centered">
+        <div class="column is-three-quarters-desktop is-full-mobile">
+            <div id="pdf-viewer" class="pdf-container">
+                <object data="{{ url_for('static', filename='files/resume.pdf') }}" type="application/pdf" width="100%" height="600px">
+                    <p>Your browser does not support PDFs.
+                        <a href="{{ url_for('static', filename='files/resume.pdf') }}">Download the PDF</a>.
+                    </p>
+                </object>
+            </div>
+            <div id="pdf-link" class="has-text-centered" style="display: none;">
+                <a href="{{ url_for('static', filename='files/resume.pdf') }}" class="button is-primary">Resume</a>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="section">

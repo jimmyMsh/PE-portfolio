@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 @import 'navbar.css';
-@import 'dark-mode.css';
 
 ::-webkit-scrollbar {
   width: 12px;
