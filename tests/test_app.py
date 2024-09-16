@@ -11,12 +11,40 @@ class AppTestCase(unittest.TestCase):
         # Clean up the database before each test
         TimelinePost.delete().execute()
         
-    def test_home(self):
+    def test_home_elements(self):
         response = self.client.get("/")
-        assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert '<h1 class="title is-1 welcome-message">Welcome to my portfolio</h1>' in html
-        assert '<h1 class="title">About Me</h1>' in html
+        
+        # Check for key elements and URLs (rendered URLs, not the Jinja2 code)
+        assert 'class="hero-body"' in html
+        assert 'href="/"' in html  
+        assert 'href="/about"' in html  
+        assert 'href="/work"' in html  
+        assert 'href="/projects"' in html 
+        
+    def test_assets_loading(self):
+        response = self.client.get("/")
+        html = response.get_data(as_text=True)
+
+        # Test if Bulma CSS and Font Awesome are loaded
+        assert 'href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"' in html
+        assert 'src="https://kit.fontawesome.com/81fe88e261.js"' in html
+
+        # Test if custom CSS and JS files are loaded (the actual URL, not the template expression)
+        assert 'href="/static/styles/main.css"' in html
+        assert 'src="/static/js/navbar.js"' in html
+        
+    def test_dynamic_content(self):
+        response = self.client.get("/")
+        html = response.get_data(as_text=True)
+
+        # Check if dynamic URL values are injected.
+        # Represents the URL of the page for social media previews. 
+        # It being there indicates that the page has the proper metadata.
+        assert 'og:url' in html
+        assert "{{ url }}" not in html  # Make sure that {{ url }} is rendered properly
+
+
     
     def test_timeline(self):
         # Response of getting a timeline post - when nothing is added yet
