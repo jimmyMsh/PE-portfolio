@@ -11,6 +11,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Only runs if the triggering 'Run Tests' workflow concluded successfully
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Deploy to VPS
     steps:
       - name: Configure SSH
