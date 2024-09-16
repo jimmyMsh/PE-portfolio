@@ -5,23 +5,23 @@
 {% block content %}
 <section class="section">
     <h1 class="title">Contact Me</h1>
-    <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
+    <form id="contactForm" onsubmit="return sendEmail()">
         <div class="field">
             <label class="label">Name</label>
             <div class="control">
-                <input class="input" type="text" name="name" placeholder="Your Name">
+                <input class="input" type="text" id="name" placeholder="Your Name" required>
             </div>
         </div>
         <div class="field">
-            <label class="label">Email</label>
+            <label class="label">Subject</label>
             <div class="control">
-                <input class="input" type="email" name="email" placeholder="Your Email">
+                <input class="input" type="text" id="subject" placeholder="Subject" required>
             </div>
         </div>
         <div class="field">
             <label class="label">Message</label>
             <div class="control">
-                <textarea class="textarea" name="message" placeholder="Your Message"></textarea>
+                <textarea class="textarea" id="message" placeholder="Your Message" required></textarea>
             </div>
         </div>
         <div class="control">
@@ -29,4 +29,18 @@
         </div>
     </form>
 </section>
+
+<script>
+function sendEmail() {
+    var name = encodeURIComponent(document.getElementById('name').value);
+    var subject = encodeURIComponent(document.getElementById('subject').value);
+    var message = encodeURIComponent(document.getElementById('message').value);
+    
+    var mailtoLink = 'mailto:jimmymishan2004@gmail.com?subject=' + name + ' - ' + subject + '&body=' + message;
+    
+    window.location.href = mailtoLink;
+    // Stops the page from reloading after the mailto link is opened
+    return false;
+}
+</script>
 {% endblock %}

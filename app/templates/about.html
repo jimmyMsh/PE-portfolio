@@ -5,10 +5,10 @@
 {% block content %}
 
 <section class="section">
-    <h1 class="title is-2">About Me (Continued)</h1>
-    <h1 class="title">Education</h1>
+    <h1 class="title is-2">About Me</h1>
+    <h2 class="title is-3">Education</h2>
 
-    <div class="card">
+    <div class="card mb-6">
         <div class="card-content">
             <div class="content">
                 <div class="columns">
@@ -33,31 +33,36 @@
             </div>
         </div>
     </div>
-
-
-    <h1 class="title py-3">Hobbies</h1>
+    <h2 class="title is-3 mt-6">Hobbies</h2>
     <div class="columns is-multiline">
-        {% for hobby in hobbies %}
-        <div class="column is-one-quarter">
-            <div class="card has-text-centered" style="height: 400px; display: flex; flex-direction: column; justify-content: center;">
-                <div class="card-image is-centered" style="padding-top: 20px;">
-                    <figure class="image is-256x256 is-inline-block">
-                        <!-- Use the precomputed img_url -->
-                        <img src="{{ hobby.img_url }}" alt="{{ hobby.name }}">
-                    </figure>
-                </div>
+        <div class="column is-half">
+            <div class="card">
                 <div class="card-content">
-                    <div class="media-content">
-                        <p class="title is-4">{{ hobby.name }}</p>
-                        <p class="subtitle is-6 mt-3">{{ hobby.description }}</p>
-                    </div>
+                    <h3 class="title is-4">Working out</h3>
+                    <p>I'm passionate about fitness and maintaining a healthy lifestyle. I enjoy strength training and cardio, usually hitting the gym 
+                        5-6 times a week. In fact, I'm so interested in working out that I've even hosted training sessions for kids in my community!</p>
                 </div>
             </div>
         </div>
-        {% endfor %}
+        <div class="column is-half">
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="title is-4">Eating out</h3>
+                    <p>Food is another passion of mine, and I love exploring different cuisines. From hole-in-the-wall eateries to nicer restaurants in NYC, I enjoy 
+                        experiencing diverse culinary traditions. For me, it's not just about the taste - it's also about sharing these experiences with the people I love most.</p>
+                </div>
+            </div>
+        </div>
+        <div class="column is-half">
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="title is-4">Programming</h3>
+                    <p>As a computer science student, programming isn't just my field of study - it's a hobby I genuinely enjoy. I love exploring new programming 
+                        languages and frameworks, building projects that address real-world issues. In my free time, I also enjoy assembling computers!</p>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </section>
 
 {% endblock %}

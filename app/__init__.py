@@ -162,14 +162,7 @@ def index():
 
 @app.route('/about')
 def about():
-    hobbies = [
-        {"name": "Working out", "description": "Love to workout ", "img_url": url_for('static', filename='img/gym.jpg')},
-        {"name": "Traveling", "description": "Exploring new places, especially around the city", "img_url": url_for('static', filename='img/traveling.jpg')},
-        {"name": "Eating out", "description": "Trying different restaurant cuisines", "img_url": url_for('static', filename='img/restaurant.jpg')},
-        {"name": "Programing", "description": "Learning new programing concepts!", "img_url": url_for('static', filename='img/Programing.jpg')},
-    ]
-
-    return render_template('about.html', title="About Me", active_page = 'about', hobbies = hobbies)
+    return render_template('about.html', title="About Me", active_page='about')
 
 @app.route('/work')
 def work():
