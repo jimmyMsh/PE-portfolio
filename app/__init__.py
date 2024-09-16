@@ -152,11 +152,10 @@ def index():
     # Formatted as [latitude, longitude, description]
     # latitude: S is negative, longitude: W is negative
     locations = [
-        [34.0708, -84.2772, "Alpharetta, GA, USA - Hometown"],
-        [40.5804, -74.2851, "Avenel, NJ, USA - Previously Lived"],
-        [1.3521, 103.8198, "Singapore - Previously Lived"],
-        [13.0843, 80.2705, "Chennai, India - Birthplace"],
-        [33.7756, -84.3963, "Georgia Tech - Pursuing BS in CS"]
+        [40.2442, -74.0296, "Ocean Township, NJ, USA - Hometown"],
+        [40.8007, -73.7276, "Great Neck, NY, USA - Previously Lived"],
+        [34.0522, -118.2437, "Los Angeles, CA, USA - Love to visit"],
+        [40.4862, -74.4518, "New Brunswick, NJ, USA - Rutgers University"]
     ]
 
     return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), active_page = 'home', locations=locations)

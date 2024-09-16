@@ -43,3 +43,30 @@
     margin: 0 auto;
     z-index: 1;
 }
+
+.custom-profile-image {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.custom-profile-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-position: center top;
+}
+
+@media screen and (max-width: 768px) {
+    .custom-profile-image {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .custom-profile-image {
+        width: 128px;
+        height: 128px;
+    }
+}
