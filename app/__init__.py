@@ -5,6 +5,7 @@ from peewee import *
 import datetime
 from playhouse.shortcuts import model_to_dict
 import requests
+import json
 
 load_dotenv()
 app = Flask(__name__)
@@ -167,46 +168,10 @@ def about():
 
 @app.route('/work')
 def work():
-    work_experiences = [
-        {
-            "role": "Self Employed Personal Trainer",
-            "company": "Jimmy Mishan Personal Training",
-            "description": (
-                "Launched and managed a personal training business, utilizing data analysis to track client progress "
-                "and develop customized training plans. Effectively communicated with clients to set goals and provide progress updates. "
-                "Used social media for client acquisition and maintained flexibility in scheduling."
-            ),
-            "dates": "Aug 2022 - Jan 2024",
-            "link": "https://www.linkedin.com/in/jimmymishan/",
-            "img_url": "https://picsum.photos/200/300"
-        },
-        {
-            "role": "Information Technology Intern",
-            "company": "New Jersey Courts (Supreme Court of NJ)",
-            "description": (
-                "Developed an asynchronous Node.js application for processing CSV and JSON files, improving data integrity "
-                "and reducing manual data entry time by 50%. Initiated the development of a mobile attendance system using Ionic and Angular, "
-                "and implemented data validation techniques to achieve 99.9% accuracy."
-            ),
-            "dates": "June 2024 - Present",
-            "link": "https://www.njcourts.gov/",
-            "img_url": "https://picsum.photos/200/300"
-        },
-        {
-            "role": "Production Engineering Fellow",
-            "company": "Meta (via MLH)",
-            "description": (
-                "Engineered and deployed a multi-component web application with Flask, MySQL, and NGINX, achieving 99% uptime. "
-                "Developed Bash scripts for automated API endpoint testing and application updates. Containerized the application using Docker, "
-                "reducing deployment time by 50% and improving scalability."
-            ),
-            "dates": "June 2024 - Present",
-            "link": "https://fellowship.mlh.io/",
-            "img_url": "https://picsum.photos/200/300"
-        }
-    ]
-
-    return render_template('work.html', title="Work Experience", active_page = 'work', work_experiences=work_experiences)
+    with open('app/static/files/work_experiences.json', 'r') as f:
+        work_experiences = json.load(f)  # Load data from JSON file
+        
+    return render_template('work.html', title="Work Experience", active_page='work', work_experiences=work_experiences)
 
 @app.route('/projects')
 def projects():

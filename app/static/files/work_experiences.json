@@ -1,0 +1,43 @@
+[
+    {
+        "role": "Software Engineering Intern",
+        "company": "New Jersey Courts (Supreme Court of NJ)",
+        "achievements": [
+            "Led the development of a Node.js application to automate the processing of attendance data from CSV and JSON files, reducing manual data entry time by an estimated 80% and improving data accuracy.",
+            "Implemented error handling and data validation in the automatic processing of attendance data, reducing manual data correction time by approximately 50%.",
+            "Architected and developed an Android mobile attendance application using Ionic and Angular, designed to replace legacy hardware solutions and streamline event management processes for 20+ events annually.",
+            "Managed API testing using Postman, ensuring that secure endpoints were correctly configured and tested, leading to a 100% success rate in API integration with the judiciary's PEGA database.",
+            "Actively participated in SCRUM development processes, contributing to sprint planning and retrospectives for 6+ concurrent projects"
+        ],
+        "dates": "June 2024 – Present",
+        "link": "https://www.njcourts.gov/",
+        "img_url": "/static/img/nj_courts.jpg"
+    },
+    {
+        "role": "Production Engineering Fellow",
+        "company": "Meta (via MLH)",
+        "achievements": [
+            "Collaborated with a team to engineer and deploy a multi-component web application on DigitalOcean, achieving 99% uptime and improving response times.",
+            "Engineered a containerized microservices architecture using Docker, separating Flask, MySQL, and NGINX components, resulting in 50% faster deployments and 35% improved resource utilization.",
+            "Implemented and optimized CI/CD pipelines with GitHub Actions, reducing production bugs by 25% and accelerating deployment cycles by 50%.",
+            "Developed and executed comprehensive testing strategies, including unit, integration, and system testing, increasing code coverage to 75% and significantly reducing post-deployment issues.",
+            "Designed and implemented custom monitoring solutions for server health using Prometheus and Grafana, improving incident response time by 50% and enhancing system observability"
+        ],
+        "dates": "June 2024 – September 2024",
+        "link": "https://fellowship.mlh.io/",
+        "img_url": "/static/img/meta_fellowship.jpg"
+    },
+    {
+        "role": "Self Employed Personal Trainer",
+        "company": "Jimmy Mishan Personal Training",
+        "achievements": [
+            "Successfully launched and managed a personal training business, developing data analysis skills to track client progress, recognize trends, and adjust training plans accordingly.",
+            "Communicated effectively with clients to establish goals and objectives, regularly providing progress updates and developing customized training plans based on individual needs.",
+            "Utilized social media and other networking channels to appeal to new clients, developing a perspective and understanding of marketing and branding concepts.",
+            "Maintained a high level of adaptability and flexibility, balancing client schedules and accommodating their changing needs and schedules."
+        ],
+        "dates": "August 2022 - January 2024",
+        "link": "https://www.linkedin.com/in/jimmymishan/",
+        "img_url": "/static/img/personal_trainer.jpg"
+    }
+]

@@ -4,32 +4,41 @@
 
 {% block content %}
 <section class="section">
-    <h1 class="title" style="color: white; font-weight: bold;">Work Experience</h1>
+    <div class="container">
+        <h1 class="title has-text-white has-text-weight-bold">Work Experience</h1>
 
-    {% for experience in work_experiences %}
-    <a href="{{ experience.link }}" class="card-link">
+        {% for experience in work_experiences %}
         <div class="card my-4">
             <div class="card-content">
                 <div class="media">
                     <div class="media-left">
                         <figure class="image is-64x64">
-                            <img src="{{ experience.img_url }}" alt="{{ experience.company }}">
+                            <img src="{{ experience.img_url }}" alt="{{ experience.company }} logo">
                         </figure>
                     </div>
                     <div class="media-content">
-                        <p class="title is-4">{{ experience.role }}</p>
-                        <p class="subtitle is-5">{{ experience.company }}</p>
+                        <p class="title is-4 is-size-5-mobile">{{ experience.role }}</p>
+                        <p class="subtitle is-5 is-size-6-mobile">{{ experience.company }}</p>
+                        <p class="is-6 is-size-7-mobile"><time datetime="{{ experience.dates }}">{{ experience.dates }}</time></p>
                     </div>
                 </div>
-
-                <div class="content">
-                    {{ experience.description }}
-                    <br />
-                    <i>{{ experience.dates }}</i>
+        
+                <div class="content is-size-6 is-size-7-mobile">
+                    <ul>
+                        {% for achievement in experience.achievements %}
+                        <li>{{ achievement }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
+        
+                {% if experience.link %}
+                <footer class="card-footer">
+                    <a href="{{ experience.link }}" class="card-footer-item is-size-6 is-size-7-mobile" target="_blank" rel="noopener noreferrer">Learn More</a>
+                </footer>
+                {% endif %}
             </div>
         </div>
-    </a>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </section>
 {% endblock %}
