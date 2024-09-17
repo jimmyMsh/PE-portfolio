@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from peewee import *
 import datetime
 from playhouse.shortcuts import model_to_dict
+import requests
 
 load_dotenv()
 app = Flask(__name__)
@@ -209,26 +210,28 @@ def work():
 
 @app.route('/projects')
 def projects():
+    # Fetch repository data from GitHub API
+    response = requests.get("https://api.github.com/users/jimmyMsh/repos")
+    
+    if response.status_code == 200:
+        github_projects = response.json()
+        projects = [
+            {
+                "title": repo["name"],
+                "description": repo["description"] or "No description available.",
+                "github_url": repo["html_url"],
+                "updated_at": datetime.datetime.strptime(repo["updated_at"], "%Y-%m-%dT%H:%M:%SZ").strftime("%B %d, %Y"),
+                "tech": ", ".join(repo.get("topics", []))
+            }
+            for repo in github_projects
+        ]
+    else:
+        projects = []  # Fallback in case the API fails
+    
+    # Order the projects by last updated date (most recent first)
+    projects.sort(key=lambda x: datetime.datetime.strptime(x["updated_at"], "%B %d, %Y"), reverse=True)
 
-    projects = [
-        {
-            "title": "Prerequisite Checker",
-            "description": "Java program for university course prerequisite analysis, potentially assisting students in identifying course prereqs and resolving class-related queries, showcasing data structures and graph theory application. Architected a DAG with adjacency lists for efficient course prerequisite modeling. Applied depth-first search and cycle detection algorithms for efficient graph traversal. Formulated file I/O strategies to enhance data accuracy and error resilience.",
-            "github_url": "https://github.com/jimmyMsh/PreReqChecker"
-        },
-        {
-            "title": "Personal Website",
-            "description": "Engineered and deployed a sophisticated personal website that serves as a portfolio showcasing my software engineering abilities and web development expertise. Key features include interactive elements using DOM, CSS animations, and asynchronous JavaScript for real-time functionality. Integrated LinkedIn, GitHub, and Calendly for enhanced professional networking and scheduling.",
-            "github_url": "https://jimmymishan.com/"
-        },
-        {
-            "title": "Music Playlist Application",
-            "description": "Created a Java application replicating streaming service operations with various features: Managed song sequences using circular linked lists for playlist navigation. Automated song library generation from CSV files for user-driven playlist customization. Implemented playlist manipulation capabilities, including merge, reverse, and shuffle functions, optimized by song popularity metrics to demonstrate intricate data structure utilization.",
-            "github_url": "https://github.com/jimmyMsh/Data-Structures/tree/master/MusicPlaylist"
-        }
-    ]
-
-    return render_template('projects.html', title="projects", active_page = 'projects', projects = projects)
+    return render_template('projects.html', title="Projects", active_page='projects', projects=projects)
 
 @app.route('/contact')
 def contact():

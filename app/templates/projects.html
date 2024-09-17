@@ -4,39 +4,36 @@
 
 {% block content %}
 <section class="section">
-    <h1 class="title">Projects</h1>
-
-    <div class="grid is-col-min-12 gap-4">
-        {% for project in projects %}
-        <div class="cell">
-            <a href="{{ project.url if project.url else 'javascript:;' }}" class="card-link">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4x3">
-                            <img src="{{ project.img_url }}" alt="Project image change this">
-                        </figure>
-                    </div>
-                    <div class="media-content p-3">
-                        <div class="columns">
-                            <div class="column">
-                                <p class="title">{{ project.title }}</p>
-                                <p class="subtitle is-6">{{ project.tech }}</p>
+    <div class="container">
+        <h1 class="title">Projects</h1>
+        <div class="columns is-multiline">
+            {% for project in projects %}
+            <div class="column is-one-third">
+                <a href="{{ project.url if project.url else 'javascript:;' }}" class="card-link">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">{{ project.title }}</p>
+                                    <p class="subtitle is-6">{{ project.tech or 'Various Technologies' }}</p>
+                                </div>
                             </div>
-                            <div class="column" align="right">
-                                <a href="{{ project.github_url }}" class="button">
-                                    <span class="icon">
-                                        <i class="fab fa-github"></i>
-                                    </span>
+                            <div class="content">
+                                {{ project.description }}
+                                <br><small style="color: black;">Last updated: {{ project.updated_at }}</small>
+                            </div>
+                            <footer class="card-footer">
+                                <a href="{{ project.github_url }}" class="card-footer-item">
+                                    <span class="icon"><i class="fab fa-github"></i></span>
                                     <span>GitHub</span>
                                 </a>
-                            </div>
+                            </footer>
                         </div>
                     </div>
-                    <div class="content px-3 pb-3">{{ project.description }}</div>
-                </div>
-            </a>
+                </a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </section>
 {% endblock %}
