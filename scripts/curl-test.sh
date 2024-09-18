@@ -4,7 +4,7 @@
 # NGINX, Docker, and the application, works together as intended, apart from the unit tests I have implemented.
 
 # Set the base URL to test endpoints
-BASE_URL="https://jimmymishan.duckdns.org/api/timeline_post"
+BASE_URL="https://jimmymishan.com/api/timeline_post"
 
 # Create a random var to use to make new random user
 RANDOM_USER_NUM=$(($RANDOM % 100))
