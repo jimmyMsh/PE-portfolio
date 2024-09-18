@@ -21,12 +21,20 @@
     <script src="https://kit.fontawesome.com/81fe88e261.js" crossorigin="anonymous"></script>
 
     {% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/splash.css') }}">
     {% endblock %}
     
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <h1 class="splash-text">Hello, I'm <span class="splash-name">Jimmy Mishan</span></h1>
+            <h2 class="splash-subtext">An aspiring software engineer.</h2>
+        </div>
+    </div>
+
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -38,7 +46,7 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-                <a class="navbar-item {{ 'is-selected' if active_page == 'home' else '' }}" href="{{ url_for('index') }}">Home</a>
+                <a id="home-link" class="navbar-item {{ 'is-selected' if active_page == 'home' else '' }}" href="{{ url_for('index') }}">Home</a>
                 <a class="navbar-item {{ 'is-selected' if active_page == 'about' else '' }}" href="{{ url_for('about') }}">About</a>
                 <a class="navbar-item {{ 'is-selected' if active_page == 'work' else '' }}" href="{{ url_for('work') }}">Work</a>
                 <a class="navbar-item {{ 'is-selected' if active_page == 'projects' else '' }}" href="{{ url_for('projects') }}">Projects</a>
@@ -49,9 +57,9 @@
     </nav>
 
     {% block content %}{% endblock %}
-
+    <script> window.globalAnimationDelay = 700; </script>
+    <script src="{{ url_for('static', filename='js/splash.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
-
     {% block scripts %}
     {% endblock %}
 </body>

@@ -16,6 +16,9 @@
 }
 
 body {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+  
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -25,6 +28,10 @@ body {
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   font-family: 'Montserrat', sans-serif;
+}
+
+body.loading {
+  opacity: 0;
 }
 
 main.content {
@@ -39,11 +46,6 @@ main.content {
   50% { background-position: 100% 50%; }
   75% { background-position: 0% 25%; }
   100% { background-position: 0% 50%; }
-}
-
-.hero-body {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
 }
 
 .title.is-1.welcome-message {
@@ -88,10 +90,6 @@ h1.title, h2.title, h3.title {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
-#map {
-  height: 70vh;
-}
-
 html, body {
   overflow-x: auto;
   overflow-y: auto;
@@ -113,5 +111,14 @@ html, body {
   .is-block-mobile {
     display: block;
     margin-bottom: 0.5rem;
+  }
+
+  .icon-text .icon {
+    font-size: 1.2rem;
+  }
+
+  .icon-text a {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
   }
 }

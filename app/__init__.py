@@ -150,17 +150,7 @@ def delete_time_line_post(post_id):
 
 @app.route('/')
 def index():
-
-    # Formatted as [latitude, longitude, description]
-    # latitude: S is negative, longitude: W is negative
-    locations = [
-        [40.2442, -74.0296, "Ocean Township, NJ, USA - Hometown"],
-        [40.8007, -73.7276, "Great Neck, NY, USA - Previously Lived"],
-        [34.0522, -118.2437, "Los Angeles, CA, USA - Love to visit"],
-        [40.4862, -74.4518, "New Brunswick, NJ, USA - Rutgers University"]
-    ]
-
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), active_page = 'home', locations=locations)
+    return render_template('index.html', title="Home", url=os.getenv("URL"), active_page = 'home')
 
 @app.route('/about')
 def about():

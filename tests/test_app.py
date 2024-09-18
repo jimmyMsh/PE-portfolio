@@ -31,7 +31,7 @@ class AppTestCase(unittest.TestCase):
         assert 'src="https://kit.fontawesome.com/81fe88e261.js"' in html
 
         # Test if custom CSS and JS files are loaded (the actual URL, not the template expression)
-        assert 'href="/static/styles/main.css"' in html
+        assert 'href="/static/styles/base.css"' in html
         assert 'src="/static/js/navbar.js"' in html
         
     def test_dynamic_content(self):

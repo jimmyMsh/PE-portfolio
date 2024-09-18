@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 
 {% block scripts %}
-<!-- Leaflet.js for map -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-<!-- Page-specific CSS and JS -->
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
 <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 {% endblock %}
@@ -14,7 +9,9 @@
 <section class="hero is-medium">
     <div class="hero-body">
         <div class="container has-text-centered">
-            <h1 class="title is-1 welcome-message">Welcome to my page 👋</h1>
+            <h1 class="title is-1 welcome-message animated-text">Hi, I'm Jimmy Mishan</h1>
+            <h2 class="subtitle is-3 animated-text">I build <span id="changing-text"></span><span class="cursor">|</span></h2>
+            <p class="is-size-5 mt-4 animated-text">Aspiring software engineer passionate about creating innovative solutions</p>
             
             <div class="columns is-centered mt-6">
                 <div class="column is-narrow">
@@ -71,14 +68,4 @@
         </div>
     </div>
 </section>
-
-<section class="section">
-    <h1 class="title has-text-centered">Where I've Been</h1>
-
-    <div class="columns is-centered">
-        <div id="map" class="column mx-5 my-3"></div>
-    </div>
-</section>
-
-<input type="hidden" id="locations_id" value="{{ locations }}">
 {% endblock %}
