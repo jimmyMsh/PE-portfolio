@@ -1,25 +1,33 @@
-// scripts.js
-document.getElementById('timeline-form').addEventListener('submit', function(event) {
-    alert('Form submitted successfully! Redirecting...');
-});
-
-// Function to format dates
 function formatDates() {
     const dateElements = document.querySelectorAll('.post-date');
     dateElements.forEach(el => {
-        const date = new Date(el.getAttribute('data-date'));
+        const dateStr = el.getAttribute('data-date');
+        if (!dateStr) return;
+        
+        
+        // Create date object - it will be in UTC
+        const date = new Date(dateStr);
+        
+        // Debug UTC time
+        console.log('UTC time:', date.toISOString());
+        
         const options = { 
             year: 'numeric', 
             month: 'short', 
             day: 'numeric', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            timeZone: 'GMT',
-            timeZoneName: 'short'
+            hour: 'numeric',
+            minute: '2-digit',
+            timeZone: 'America/New_York',
+            timeZoneName: 'short',
+            hour12: true
         };
-        el.textContent = date.toLocaleString('en-US', options);
+        
+        // Convert to EST and format
+        const formattedDate = date.toLocaleString('en-US', options);
+        console.log('Formatted in EST:', formattedDate);
+        
+        el.textContent = formattedDate;
     });
 }
 
-// Initial call to format existing dates
-formatDates();
+document.addEventListener('DOMContentLoaded', formatDates);

@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, url_for, jsonify, redirect
 from dotenv import load_dotenv
 from peewee import *
-import datetime
+from datetime import datetime, timezone
 from playhouse.shortcuts import model_to_dict
 import requests
 import json
@@ -35,7 +35,7 @@ class TimelinePost(Model):
     name = CharField()
     email = CharField()
     content = TextField()
-    created_at = DateTimeField(default=datetime.datetime.now)
+    created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     
     class Meta:
         database = mydb
@@ -45,12 +45,20 @@ mydb.connect()
 # Add the above defined table
 mydb.create_tables([TimelinePost])
 
-# Formats the datetime so that it is consistent on template page
-@app.template_filter('format_datetime')
-def format_datetime(value):
-    if value is None:
+@app.template_filter('force_utc_iso')
+def force_utc_iso(value):
+    """Force UTC timezone and return ISO-8601 string with Z suffix."""
+    if not value:
         return ""
-    return value.strftime('%Y-%m-%d %H:%M:%S')
+    
+    # Ensure UTC timezone
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=timezone.utc)
+    elif value.tzinfo != timezone.utc:
+        value = value.astimezone(timezone.utc)
+    
+    # Return ISO format with explicit Z suffix
+    return value.strftime('%Y-%m-%dT%H:%M:%SZ')
 
 # Helper function to create a hash of the email so that it could be used to fetch the emails
 @app.template_filter('to_md5')
@@ -175,7 +183,7 @@ def projects():
                 "title": repo["name"],
                 "description": repo["description"] or "No description available.",
                 "github_url": repo["html_url"],
-                "updated_at": datetime.datetime.strptime(repo["updated_at"], "%Y-%m-%dT%H:%M:%SZ").strftime("%B %d, %Y"),
+                "updated_at": datetime.strptime(repo["updated_at"], "%Y-%m-%dT%H:%M:%SZ").strftime("%B %d, %Y"),
                 "tech": ", ".join(repo.get("topics", []))
             }
             for repo in github_projects
@@ -184,7 +192,7 @@ def projects():
         projects = []  # Fallback in case the API fails
     
     # Order the projects by last updated date (most recent first)
-    projects.sort(key=lambda x: datetime.datetime.strptime(x["updated_at"], "%B %d, %Y"), reverse=True)
+    projects.sort(key=lambda x: datetime.strptime(x["updated_at"], "%B %d, %Y"), reverse=True)
 
     return render_template('projects.html', title="Projects", active_page='projects', projects=projects)
 

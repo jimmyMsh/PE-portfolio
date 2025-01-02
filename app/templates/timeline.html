@@ -61,7 +61,7 @@
                             <div class="post-metadata">
                                 <strong>{{ post.name }}</strong>
                                 <small class="email">{{ post.email }}</small>
-                                <small class="post-date" data-date="{{ post.created_at }}"></small>
+                                <small class="post-date" data-date="{{ post.created_at | force_utc_iso }}"></small>
                             </div>
                             <p class="post-content">{{ post.content }}</p>
                         </div>
