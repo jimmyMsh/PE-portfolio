@@ -6,10 +6,12 @@ from datetime import datetime, timezone
 from playhouse.shortcuts import model_to_dict
 import requests
 import json
+from .auth import init_auth, admin_required
 
 load_dotenv()
 app = Flask(__name__)
 app.config['DEBUG'] = True
+init_auth(app)
 
 db_host = os.getenv('MYSQL_HOST')
 db_user = os.getenv('MYSQL_USER')
@@ -142,17 +144,36 @@ def get_time_line_post():
     }
 
 @app.route('/api/timeline_post/<int:post_id>', methods = ['DELETE'])
+@admin_required
 def delete_time_line_post(post_id):
+    """
+    Delete endpoint for timeline posts. Protected by admin authentication.
+    
+    Args:
+        post_id (int): The ID of the post to delete
+        
+    Returns:
+        JSON response with result of deletion attempt
+    """
     try:
-        # Attempt to get post by ID
+        # Attempt to find the post by its ID
         post = TimelinePost.get_by_id(post_id)
-        # If found, delete the post
+        
+        # If found, delete the post from database
         post.delete_instance()
-        # Return a message with the status code 200
-        return jsonify({'message': 'Timeline post deleted successfully'}), 200
+        
+        # Return success response with post ID for frontend reference
+        return jsonify({
+            'message': 'Timeline post deleted successfully',
+            'post_id': post_id
+        }), 200
+        
     except TimelinePost.DoesNotExist:
-        # If the post does not exist, return an error message with status code 404
-        return jsonify({'error': 'Timeline post not found'}), 404
+        # If post doesn't exist, return 404 with error message
+        return jsonify({
+            'error': 'Timeline post not found',
+            'post_id': post_id
+        }), 404
 
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ API endpoint definitions ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

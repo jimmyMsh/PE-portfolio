@@ -20,8 +20,8 @@
   transition: all 0.3s ease;
 }
 
-.navbar-item:hover,
-.navbar-item.is-selected {
+.navbar-start .navbar-item:hover,
+.navbar-start .navbar-item.is-selected {
   background-color: white;
   color: black;
 }
@@ -33,4 +33,51 @@
 .navbar-menu {
   background-color: rgb(0, 0, 0);
   border-radius: 0 0 25px 25px;
+}
+
+.admin-tag {
+  background-color: #48c774;
+  color: black;
+  border-radius: 25px;
+  padding: 8px 20px;
+  display: inline-block;
+}
+
+.admin-logout {
+  background-color: #f14668;
+  color: black;
+  cursor: pointer;
+  border-radius: 25px;
+  padding: 8px 20px;
+  border: none;
+}
+
+.admin-tag-container.navbar-item,
+.admin-tag-container.navbar-item:hover {
+  background-color: transparent;
+  margin: 0 8px;
+  padding: 0.5rem;
+}
+
+.navbar-end .navbar-item {
+  margin: 0 8px;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 1023px) {
+  .navbar-menu.is-active {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navbar-end {
+    order: -1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: .5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
 }

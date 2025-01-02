@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <div class="box">
+                    <h1 class="title has-text-centered">Admin Login</h1>
+                    
+                    {% if not session.get('is_admin') %}
+                        <form id="admin-login-form">
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <div class="control has-icons-left">
+                                    <input class="input" 
+                                           type="password" 
+                                           id="admin-password" 
+                                           placeholder="Enter admin password"
+                                           required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <button type="submit" 
+                                            class="button is-primary is-fullwidth">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="login-error" 
+                                 class="notification is-danger is-light" 
+                                 style="display: none;">
+                            </div>
+                        </form>
+                    {% else %}
+                        <div class="content has-text-centered">
+                            <p class="subtitle">
+                                You are currently logged in as admin.
+                            </p>
+                            <button id="admin-logout" 
+                                    class="button is-light">
+                                Logout
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    window.APP_URLS = {
+        login: "{{ url_for('admin_login') }}",
+        logout: "{{ url_for('admin_logout') }}",
+        home: "{{ url_for('index') }}"
+    };
+</script>
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

@@ -49,11 +49,12 @@
 
         <div id="posts" class="section">
             {% for post in timeline_posts %}
-            <div class="box">
+            <div class="box" data-post-id="{{ post.id }}">
                 <article class="media">
                     <div class="media-left is-hidden-mobile">
                         <figure class="image is-48x48">
-                            <img src="https://www.gravatar.com/avatar/{{ post.email | to_md5 }}?s=48&d=identicon" alt="Profile image">
+                            <img src="https://www.gravatar.com/avatar/{{ post.email | to_md5 }}?s=48&d=identicon" 
+                                 alt="Profile image">
                         </figure>
                     </div>
                     <div class="media-content">
@@ -61,19 +62,38 @@
                             <div class="post-metadata">
                                 <strong>{{ post.name }}</strong>
                                 <small class="email">{{ post.email }}</small>
-                                <small class="post-date" data-date="{{ post.created_at | force_utc_iso }}"></small>
+                                <small class="post-date" 
+                                       data-date="{{ post.created_at | force_utc_iso }}">
+                                </small>
                             </div>
                             <p class="post-content">{{ post.content }}</p>
                         </div>
                     </div>
+                    
+                    {% if session.get('is_admin') %}
+                        <div class="media-right">
+                            <button class="button is-danger is-small delete-post">
+                                <span class="icon">
+                                    <i class="fas fa-trash"></i>
+                                </span>
+                            </button>
+                        </div>
+                    {% endif %}
                 </article>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
-{% endblock %}
 
 {% block scripts %}
+<script>
+    window.APP_URLS = {
+        deletePost: "{{ url_for('delete_time_line_post', post_id=0) }}".slice(0, -1)
+    };
+</script>
+
 <script src="{{ url_for('static', filename='js/timeline.js') }}"></script>
-{% endblock %}
+{% endblock %} 
+
+{% endblock %} 

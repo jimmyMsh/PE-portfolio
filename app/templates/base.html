@@ -53,7 +53,19 @@
                 <a class="navbar-item {{ 'is-selected' if active_page == 'timeline' else '' }}" href="{{ url_for('timeline') }}">Timeline</a>            
                 <a class="navbar-item {{ 'is-selected' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">Contact Me</a>
             </div>
-        </div>
+
+            <div class="navbar-end">
+                {% if session.get('is_admin') %}
+                    <div class="navbar-item has-text-centered admin-tag-container">
+                        <span class="admin-tag">Admin Mode</span>
+                    </div>
+                    <div class="navbar-item">
+                        <button id="admin-logout" class="admin-logout">
+                            Logout
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
     </nav>
 
     {% block content %}{% endblock %}
