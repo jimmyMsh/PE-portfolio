@@ -13,6 +13,8 @@ This is a full-stack personal portfolio website developed with Flask and Jinja, 
 - **Interactive Frontend**: Responsive design with Bulma CSS and interactive elements using JavaScript.
 - **API Endpoints**: RESTful API for managing timeline posts.
 - **Secure Deployment**: NGINX configured as a reverse proxy with SSL termination.
+- **Admin Authentication**: Session-based admin login and logout functionality.
+- **Protected API Endpoints**: Admin-only routes secured with decorators.
 
 ## Tech Stack
 - **Backend**: Flask, Jinja, Python
@@ -29,6 +31,7 @@ The application follows a microservices architecture:
 2. **MySQL Database**: Stores timeline posts and user data.
 3. **Nginx**: Acts as a reverse proxy and handles SSL termination.
 4. **Certbot**: Automates the process of obtaining and renewing Let's Encrypt SSL certificates.
+5. **Authentication Module**: Provides session-based admin authentication and access control for admin-only features.
 
 ## CI/CD and Security Features
 
@@ -42,11 +45,13 @@ Security features include:
 - **Rate limiting** on API endpoints.
 - **Secure handling** of environment variables.
 - **SSL/TLS encryption** using Let's Encrypt.
+- **Admin Access Control**: Admin routes protected with session-based authentication.
 
 ## Project Structure
 
 - **[`app/`](app/)**: Contains the main Flask application code.
   - **[`__init__.py`](app/__init__.py)**: Initializes the Flask app and its configurations.
+  - **[`auth.py`](app/auth.py)**: Provides admin login, logout, and session management.
   - **[`static/`](app/static/)**: Contains static files.
     - **[`img/`](app/static/img/)**: Icons and images.
     - **[`js/`](app/static/js/)**: JavaScript files.
@@ -85,7 +90,10 @@ Security features include:
 
 4. Access the application at `http://localhost:5000`.
 
-    > **Note:** This setup bypasses Nginx and runs the Flask application directly, making it easier to test locally without SSL configuration.
+  > **Note 1:** This setup bypasses Nginx and runs the Flask application directly, making it easier to test locally without SSL configuration.
+
+  > **Note 2:** Visit `/login` to access the admin login page. Use the `ADMIN_PASSWORD` from your `.env` file to log in and unlock admin-only features like timeline post deletion.
+
 
 5. To stop the application, use:
 
