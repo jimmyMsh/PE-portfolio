@@ -23,16 +23,18 @@ services:
     image: jonasal/nginx-certbot
     restart: always
     environment:
-      - CERTBOT_EMAIL=name@exmaple.com
+      - CERTBOT_EMAIL=name@example.com
     ports:
       - 80:80
       - 443:443
     volumes:
-      - nginx_secrets:/etc/letsencrypt
-      - ./user_conf.d:/etc/nginx/user_conf.d
+      - nginx_secrets:/etc/letsencrypt               # Stores SSL certificates
+      - certbot_webroot:/var/www/letsencrypt         # Stores webroot files for certbot validation
+      - ./user_conf.d:/etc/nginx/user_conf.d         # Stores nginx configuration file
     depends_on:
       - myportfolio
 
 volumes:
   mydatabase:
   nginx_secrets:
+  certbot_webroot:
